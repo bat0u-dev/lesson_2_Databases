@@ -19,7 +19,7 @@ public class Main {
 
 //        System.out.println(create());
 
-//       System.out.println(update());
+//       System.out.println(update());ГШНГШЩ4   43ЩЗЩЗ 4ЩЗЖЖДЖ+яЩЗ
 
 //        System.out.println(select(1009));
 
@@ -54,33 +54,33 @@ public class Main {
         }
     }
 
-    public static int create() throws SQLException {
+    public static int newTable() throws SQLException {
         return stmt.executeUpdate("CREATE TABLE students (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
                 "score TEXT)");
     }
 
-    public static void insert() throws SQLException {
+    public static void putDataToDB(String participant, int participantsQuantity, int racePlace) throws SQLException {
 //        return stmt.executeUpdate("INSERT INTO students (name, score) VALUES ('Bob1','101')");
 
         pstmt = connection.prepareStatement("INSERT INTO students (name, score)" +
                 "VALUES (?, ?);");
         connection.setAutoCommit(false);
-        for (int i = 0; i < 500; i++) {
-            pstmt.setString(1, "Bob" + i);
-            pstmt.setInt(2, 10 + i);
+        for (int i = 0; i < participantsQuantity; i++) {
+            pstmt.setString(1, participant + i);
+            pstmt.setInt(2, 10*racePlace);
             pstmt.addBatch();
         }
         pstmt.executeBatch();
         connection.setAutoCommit(true);
     }
 
-    public static int update() throws SQLException {
+    public static int updateScoreByID() throws SQLException {
         return stmt.executeUpdate("UPDATE students SET score = '202' WHERE id = '1009'");
     }
 
-    public static String select(int id) throws SQLException {
+    public static String getDataByID(int id) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT id, name, score FROM students WHERE id = '" + id + "'");
         return rs.getString("name") + " " + rs.getString("score");
     }
