@@ -10,6 +10,7 @@ public class FileReader {
     private Scanner sc;
     private Statement st;
     private List<String> list;
+    Connection connection;
 
     public List<String> fileDataToListPacker() throws SQLException {
         list = new ArrayList<>();
@@ -26,7 +27,7 @@ public class FileReader {
     }
 
     public void putDataToDB(int columnQuantity) throws ClassNotFoundException, SQLException {
-        Connection connection;
+
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:mainDB.db");
         PreparedStatement pstmt = connection.prepareStatement("INSERT INTO students (id, name, score)" +
