@@ -30,6 +30,7 @@ public class FileReader {
 
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:mainDB.db");
+        
         PreparedStatement pstmt = connection.prepareStatement("INSERT INTO students (id, name, score)" +
                 "VALUES (?, ?, ?);");
         connection.setAutoCommit(false);
